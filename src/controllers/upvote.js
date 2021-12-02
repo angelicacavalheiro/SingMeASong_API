@@ -4,6 +4,18 @@ import connection from '../database/database.js';
 async function upvote(req, res) {
   const { id } = req.params;
   try {
+    // MIDDLEWARE
+    // vendo se esse id corresponde a alguma recomendação existente
+    const getId = await connection.query(`
+     SELECT "id"
+     FROM "recommendations"
+     WHERE "id" = ($1);
+   `, [id]);
+    const exists = getId.rowCount;
+    if (!exists) {
+      return res.status(404).send('there is no recommendation with this id');
+    }
+
     const result = await connection.query(`
         SELECT "score"
         FROM "recommendations"
@@ -23,7 +35,7 @@ async function upvote(req, res) {
         WHERE "id" = $2
       `, [newScore, id]);
 
-    return res.sendStatus(200);
+    return res.status(200).send('incremented');
   } catch (error) {
     res.sendStatus(500);
   }
