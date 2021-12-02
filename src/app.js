@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import { recommendation } from './controllers/recommendation.js';
 import { upvote } from './controllers/upvote.js';
+import { downvote } from './controllers/downvote.js';
 
 const app = express();
 app.use(cors());
@@ -16,4 +17,7 @@ app.get('/status', (req, res) => {
 app.post('/recommendations', recommendation);
 
 app.post('/recommendations/:id/upvote', upvote);
+
+app.post('/recommendations/:id/downvote', downvote);
+
 export default app;
