@@ -11,7 +11,9 @@
         "sourceType": "module"
     },
     "rules": {
-        "import/extensions": [ "error", { "js": "ignorePackages" } ]
+        "import/extensions": [ "error", { "js": "ignorePackages" } ],
+        "import/prefer-default-export": "off",
+        "no-console": "off",
     }
 
 }
