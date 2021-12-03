@@ -26,7 +26,6 @@ async function downvote(req, res) {
 
     // apagando caso score seja menor que -5
     if (atualScore && (atualScore === (-5))) {
-      console.log('vou deletar');
       await connection.query(`
         DELETE
         FROM "recommendations"

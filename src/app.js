@@ -4,6 +4,7 @@ import cors from 'cors';
 import { recommendation } from './controllers/recommendation.js';
 import { upvote } from './controllers/upvote.js';
 import { downvote } from './controllers/downvote.js';
+import { randomRecommendation } from './controllers/randomRecommendation.js';
 
 const app = express();
 app.use(cors());
@@ -19,5 +20,7 @@ app.post('/recommendations', recommendation);
 app.post('/recommendations/:id/upvote', upvote);
 
 app.post('/recommendations/:id/downvote', downvote);
+
+app.get('/recommendations/random', randomRecommendation);
 
 export default app;
