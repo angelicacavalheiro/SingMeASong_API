@@ -1,11 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import { recommendation } from './controllers/recommendation.js';
-import { upvote } from './controllers/upvote.js';
-import { downvote } from './controllers/downvote.js';
-import { randomRecommendation } from './controllers/randomRecommendation.js';
-import { topRecommendation } from './controllers/topRecommendations.js';
+import * as controller from './controllers/recommendationsController.js';
 
 const app = express();
 app.use(cors());
@@ -16,14 +12,14 @@ app.get('/status', (req, res) => {
   res.send('Server online');
 });
 
-app.post('/recommendations', recommendation);
+app.post('/recommendations', controller.recommendation);
 
-app.post('/recommendations/:id/upvote', upvote);
+app.post('/recommendations/:id/upvote', controller.upvote);
 
-app.post('/recommendations/:id/downvote', downvote);
+app.post('/recommendations/:id/downvote', controller.downvote);
 
-app.get('/recommendations/random', randomRecommendation);
+app.get('/recommendations/random', controller.randomRecommendation);
 
-app.get('/recommendations/top/:amount', topRecommendation);
+app.get('/recommendations/top/:amount', controller.topRecommendation);
 
 export default app;
