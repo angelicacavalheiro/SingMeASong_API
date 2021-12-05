@@ -47,33 +47,41 @@ async function decreasesScore(id) {
   return 'decremented';
 }
 
-async function getRecommendations() {
-  const randomNumber = Math.floor(Math.random() * 10 + 1);
-
-  if (randomNumber <= 7) {
-    const songWithTheHighestScore = await repository.getTopRecommendations();
-
-    if (!songWithTheHighestScore) {
-      const randomSong = await repository.getRandomRecommendations();
-      if (!randomSong) {
-        return null;
-      }
-      return (randomSong);
-    }
-
-    return (songWithTheHighestScore);
+async function requestRandomRecommendation() {
+  const randomSong = await repository.getRandomRecommendations();
+  if (!randomSong) {
+    return null;
   }
+  return (randomSong);
+}
 
+async function requestTopRecommendation() {
+  const songWithTheHighestScore = await repository.getTopRecommendations();
+
+  if (!songWithTheHighestScore) {
+    const randomSong = await requestRandomRecommendation();
+    return (randomSong);
+  }
+  return (songWithTheHighestScore);
+}
+
+async function requestBottomRecommendation() {
   const songWithTheLowestScore = await repository.getBottomRecommendations();
 
   if (!songWithTheLowestScore) {
-    const randomSong = await repository.getRandomRecommendations();
-    if (!randomSong) {
-      return null;
-    }
+    const randomSong = await requestRandomRecommendation();
     return (randomSong);
   }
+  return (songWithTheLowestScore);
+}
 
+async function getRecommendations() {
+  const randomNumber = Math.floor(Math.random() * 10 + 1);
+  if (randomNumber <= 7) {
+    const songWithTheHighestScore = await requestTopRecommendation();
+    return (songWithTheHighestScore);
+  }
+  const songWithTheLowestScore = await requestBottomRecommendation();
   return (songWithTheLowestScore);
 }
 

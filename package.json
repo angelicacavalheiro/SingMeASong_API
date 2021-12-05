@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=prod npx jest -i",
-    "test:watch": "NODE_ENV=prod npx jest --watchAll",
+    "test": "NODE_ENV=dev npx jest -i",
+    "test:watch": "NODE_ENV=dev npx jest --watchAll",
     "start": "NODE_ENV=prod npx nodemon server.js",
     "start:dev" : "NODE_ENV=dev npx nodemon server.js",
     "deploy" : "git push heroku"
