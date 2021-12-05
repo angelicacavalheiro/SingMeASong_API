@@ -176,3 +176,44 @@ describe('Request bottom recommendation service', () => {
     }]);
   });
 });
+
+describe('Get recommendations service', () => {
+  it('returns a song with score > 10 for random number <=7', async () => {
+    jest.spyOn(Math, 'floor').mockImplementationOnce(() => 5);
+    jest.spyOn(repository, 'getTopRecommendations').mockImplementationOnce(() => [
+      {
+        id: 5,
+        name: 'Chitãozinho E Xororó - Evidências',
+        youtubeLink: 'https://www.youtube.com/watch?v=ePjtnSPFWK8&ab_channel=CHXVEVO',
+        score: 15,
+      },
+    ]);
+    const result = await service.getRecommendations();
+    expect(result).toEqual([{
+      id: 5,
+      name: 'Chitãozinho E Xororó - Evidências',
+      youtubeLink: 'https://www.youtube.com/watch?v=ePjtnSPFWK8&ab_channel=CHXVEVO',
+      score: 15,
+    }]);
+  });
+
+  it('returns a song with score <= 10 for random number >7', async () => {
+    jest.spyOn(Math, 'floor').mockImplementationOnce(() => 8);
+    jest.spyOn(repository, 'getBottomRecommendations').mockImplementationOnce(() => [
+      {
+        id: 10,
+        name: 'Chitãozinho E Xororó - Evidências',
+        youtubeLink: 'https://www.youtube.com/watch?v=ePjtnSPFWK8&ab_channel=CHXVEVO',
+        score: 5,
+      },
+    ]);
+
+    const result = await service.getRecommendations();
+    expect(result).toEqual([{
+      id: 10,
+      name: 'Chitãozinho E Xororó - Evidências',
+      youtubeLink: 'https://www.youtube.com/watch?v=ePjtnSPFWK8&ab_channel=CHXVEVO',
+      score: 5,
+    }]);
+  });
+});
