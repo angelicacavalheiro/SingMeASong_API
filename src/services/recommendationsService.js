@@ -13,17 +13,20 @@ async function bodyValidation({ name, youtubeLink }) {
   return 'ok';
 }
 
-async function increaseScore(id) {
+async function getAtualScore(id) {
   const currentScore = await repository.getCurrentScore(id);
   const atualScore = currentScore;
   let newScore;
   if (atualScore) {
     newScore = atualScore + 1;
-  } else {
-    newScore = 1;
   }
+  newScore = 1;
+  return newScore;
+}
 
-  const requestInsertofNewScore = await repository.postNewScore(newScore, id);
+async function increaseScore(id) {
+  const score = await getAtualScore(id);
+  const requestInsertofNewScore = await repository.postNewScore(score, id);
   if (!requestInsertofNewScore) {
     return null;
   }
@@ -31,16 +34,8 @@ async function increaseScore(id) {
 }
 
 async function decreasesScore(id) {
-  const currentScore = await repository.getCurrentScore(id);
-  const atualScore = currentScore;
-  let newScore;
-  if (atualScore) {
-    newScore = atualScore - 1;
-  } else {
-    newScore = -1;
-  }
-
-  const requestInsertofNewScore = await repository.postNewScore(newScore, id);
+  const score = await getAtualScore(id);
+  const requestInsertofNewScore = await repository.postNewScore(score, id);
   if (!requestInsertofNewScore) {
     return null;
   }

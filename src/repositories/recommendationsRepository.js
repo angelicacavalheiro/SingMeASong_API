@@ -29,12 +29,12 @@ async function getCurrentScore(id) {
   return (result.rows[0].score);
 }
 
-async function postNewScore(newScore, id) {
+async function postNewScore(score, id) {
   const result = await connection.query(`
     UPDATE "recommendations"
     SET "score" = $1
     WHERE "id" = $2
-  `, [newScore, id]);
+  `, [score, id]);
 
   return result.rowCount;
 }

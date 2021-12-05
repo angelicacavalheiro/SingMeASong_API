@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import * as service from '../../src/services/recommendationsService.js';
 
-describe('GET /recommendations', () => {
+describe('Body validation service', () => {
   it('returns "ok" for valid body', async () => {
     const name = 'Relax Your Mind - Lofi hip hop mix';
     const youtubeLink = 'https://www.youtube.com/watch?v=A_mr3LUPqSQ&ab_channel=ChilliVibes';
