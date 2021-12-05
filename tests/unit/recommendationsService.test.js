@@ -34,3 +34,22 @@ describe('Get atual score service', () => {
     expect(result).toEqual(1);
   });
 });
+
+describe('Increase score service', () => {
+  it('returns "incremented" for correct insertion in the database', async () => {
+    const id = 1;
+    jest.spyOn(repository, 'getCurrentScore').mockImplementationOnce(() => 1);
+    jest.spyOn(repository, 'postNewScore').mockImplementationOnce(() => 1);
+    const result = await service.increaseScore(id);
+    console.log(result);
+    expect(result).toEqual('incremented');
+  });
+
+  it('returns null for incorrect database entry', async () => {
+    const id = 1;
+    jest.spyOn(repository, 'getCurrentScore').mockImplementationOnce(() => 1);
+    jest.spyOn(repository, 'postNewScore').mockImplementationOnce(() => null);
+    const result = await service.increaseScore(id);
+    expect(result).toEqual(null);
+  });
+});
