@@ -66,7 +66,34 @@ describe('Decreases score service', () => {
     const id = 1;
     jest.spyOn(repository, 'getCurrentScore').mockImplementationOnce(() => 1);
     jest.spyOn(repository, 'postNewScore').mockImplementationOnce(() => null);
-    const result = await service.increaseScore(id);
+    const result = await service.decreasesScore(id);
+    expect(result).toEqual(null);
+  });
+});
+
+describe('Request random recommendation service', () => {
+  it('returns the body of a recommendation', async () => {
+    jest.spyOn(repository, 'getRandomRecommendations').mockImplementationOnce(() => [
+      {
+        id: 1,
+        name: 'Chitãozinho E Xororó - Evidências',
+        youtubeLink: 'https://www.youtube.com/watch?v=ePjtnSPFWK8&ab_channel=CHXVEVO',
+        score: 245,
+      },
+    ]);
+
+    const result = await service.requestRandomRecommendation();
+    expect(result).toEqual([{
+      id: 1,
+      name: 'Chitãozinho E Xororó - Evidências',
+      youtubeLink: 'https://www.youtube.com/watch?v=ePjtnSPFWK8&ab_channel=CHXVEVO',
+      score: 245,
+    }]);
+  });
+
+  it('returns null for an empty database', async () => {
+    jest.spyOn(repository, 'getRandomRecommendations').mockImplementationOnce(() => null);
+    const result = await service.requestRandomRecommendation();
     expect(result).toEqual(null);
   });
 });

@@ -87,4 +87,5 @@ export {
   decreasesScore,
   getRecommendations,
   getAtualScore,
+  requestRandomRecommendation,
 };
