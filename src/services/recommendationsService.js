@@ -19,8 +19,9 @@ async function getAtualScore(id) {
   let newScore;
   if (atualScore) {
     newScore = atualScore + 1;
+  } else {
+    newScore = 1;
   }
-  newScore = 1;
   return newScore;
 }
 
@@ -85,4 +86,5 @@ export {
   increaseScore,
   decreasesScore,
   getRecommendations,
+  getAtualScore,
 };
