@@ -88,4 +88,5 @@ export {
   getRecommendations,
   getAtualScore,
   requestRandomRecommendation,
+  requestTopRecommendation,
 };
