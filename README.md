@@ -82,8 +82,8 @@ $ npm install
 ```
 $ ntl -> start
 ```
-**Run the application in development mode**
-Create a .env.dev file and fill it using your environment variables following the .env.example
+**Run the application in development mode** </br>
+Create a .env.dev file and fill it using your environment variables following the .env.example </br>
 You can find the .env.example [here](https://github.com/angelicacavalheiro/SingMeASong_API/blob/main/.env.example).
 ```
 $ ntl -> start:dev
